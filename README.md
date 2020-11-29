@@ -20,7 +20,7 @@ Objetivos conseguidos:
 ```
 ----------------------------
 # PARTE 1 [5 PUNTOS]
-# EJECUCIÓN EN LOCAL + SPARK SUBMIT
+# EJECUCIÓN EN LOCAL (4 puntos) + SPARK SUBMIT (1 punto)
 
 
 Pasos seguidos:
@@ -84,7 +84,7 @@ Pasos seguidos:
 ------------------
 
 # PARTE 2 [7 PUNTOS]
-# DESPLIEGUE EN DOCKER + DOCKER-COMPOSE
+# DESPLIEGUE EN DOCKER (1 punto) + DOCKER-COMPOSE (1 punto)
 
   1. Instalar Docker:
   ```sh
@@ -103,7 +103,7 @@ Pasos seguidos:
     $ sudo chmod +x /usr/local/bin/docker-compose
     $ sudo curl -L https://raw.githubusercontent.com/docker/compose/1.27.4/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
    ``` 
-  3. Creamos contenedores de Docker:
+  3. Creamos contenedores docker:
   - 3.1. MongoDB
        - 3.1.1. Imagen Utilizada: https://hub.docker.com/layers/mongo/library/mongo/4.4.2/images/sha256-8ac5e14d9badded42bcbad612a43bb28ae1bb7e411d2965588dfff83087c5aac?context=explore
       - 3.1.2. Consideraciones:
