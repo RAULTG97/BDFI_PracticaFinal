@@ -5,9 +5,9 @@ services:
     container_name: mongodb
     build: ./mongodb
     ports:
-      - "27017:27017" # remember the port expose syntax is HOST:CONTAINER !
+      - "27017:27017"
     volumes:
-      - mongodbstorage:/data/mongodb
+      - practica_final_bdfi_data/:/practica_final_bdfi_data
     networks:
       - practica_final_bdfi
 
@@ -22,6 +22,8 @@ services:
   zookeeper:
     container_name: zookeeper
     build: ./zookeeper
+    ports:
+      - "2181:2181"
     networks:
       - practica_final_bdfi
 
@@ -30,31 +32,35 @@ services:
     build: ./kafka
     depends_on:
       - zookeeper
+    ports:
+      - "9092:9092"
     networks:
       - practica_final_bdfi
 
-  sparkmaster:
+  spark-master:
     container_name: sparkmaster
-    image: bitnami/spark:2.4.4
+    build: ./sparkmaster
+    depends_on:
+      - kafka
     ports:
       - '8080:8080'
+      - '7077:7077'
     volumes:
-      - ./spark/models/:/job_data/models #Bind mount to mount models dir on each spark node
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      - ./jars_dir:/opt/bitnami/spark/jars/ivy
     networks:
       - practica_final_bdfi
 
-  sparkworker:
+  spark-worker:
     container_name: sparkworker
-    image: bitnami/spark:2.4.4
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
+    build: ./sparkworker
+    depends_on:
+      - spark-master
     ports:
-    - '8081:8081'
+      - '8081:8081'
     volumes:
-      - ./spark/models/:/job_data/models  #Bind mount to mount models dir on each spark node
+      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      - ./jars_dir:/opt/bitnami/spark/jars/ivy
     networks:
       - practica_final_bdfi
 
@@ -63,4 +69,4 @@ networks:
     driver: bridge
 
 volumes:
-  mongodbstorage:
+  practica_final_bdfi_data:

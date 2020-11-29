@@ -1,17 +1,11 @@
 #KAFKA
+FROM wurstmeister/kafka:2.12-2.3.0
 
-FROM johnnypark/kafka-zookeeper:2.3.1
-
-WORKDIR /opt/kafka_2.12-2.3.1/config
-
-RUN ["rm", "server.properties"]
-
-COPY ./server.properties .
-
-WORKDIR /opt/kafka_2.12-2.3.1
-
-COPY ./createTopic.sh .
-
-RUN chmod +x createTopic.sh
-
-RUN ["bin/kafka-server-start.sh", "config/server.properties"]
+ENV KAFKA_ADVERTISED_HOST_NAME=kafka
+ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+ENV KAFKA_CREATE_TOPICS="flight_delay_classification_request:1:1"
+ENV KAFKA_PORT=9092
+ENV KAFKA_LISTENERS=INSIDE://:9092,OUTSIDE://:9094
+ENV KAFKA_ADVERTISED_LISTENERS=INSIDE://kafka:9092,OUTSIDE://localhost:9094
+ENV KAFKA_LISTENERS=PLAINTEXT://:9092
+ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
