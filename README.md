@@ -10,7 +10,7 @@ Objetivos conseguidos:
 
 ![alt tag](https://github.com/RAULTG97/BDFI_PracticaFinal/blob/main/escenario.png)
 
-#EJECUCIÓN
+# EJECUCIÓN
 
 ```sh
   $ git clone 
@@ -19,8 +19,8 @@ Objetivos conseguidos:
   $ ver como manejar el lanzamiento del spark-submit
 ```
 ----------------------------
-#PARTE 1 [5 PUNTOS]
-#EJECUCIÓN EN LOCAL + SPARK SUBMIT
+# PARTE 1 [5 PUNTOS]
+# EJECUCIÓN EN LOCAL + SPARK SUBMIT
 
 
 Pasos seguidos:
@@ -83,8 +83,8 @@ Pasos seguidos:
 
 ------------------
 
-#PARTE 2 [7 PUNTOS]
-#DESPLIEGUE EN DOCKER + DOCKER-COMPOSE
+# PARTE 2 [7 PUNTOS]
+# DESPLIEGUE EN DOCKER + DOCKER-COMPOSE
 
   1. Instalar Docker:
   ```sh
