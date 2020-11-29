@@ -13,7 +13,7 @@ Objetivos conseguidos:
 # EJECUCIÓN
 
 ```sh
-  $ git clone 
+  $ git clone https://github.com/RAULTG97/BDFI_PracticaFinal.git
   $ cd BDFI_PracticaFinal
   $ sudo docker-compose up
   $ ver como manejar el lanzamiento del spark-submit
