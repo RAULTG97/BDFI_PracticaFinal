@@ -1,0 +1,66 @@
+version: '3'
+services:
+
+  mongodb:
+    container_name: mongodb
+    build: ./mongodb
+    ports:
+      - "27017:27017" # remember the port expose syntax is HOST:CONTAINER !
+    volumes:
+      - mongodbstorage:/data/mongodb
+    networks:
+      - practica_final_bdfi
+
+  flask:
+    container_name: flask
+    build: ./flask
+    ports:
+      - "5000:80"
+    networks:
+      - practica_final_bdfi
+  
+  zookeeper:
+    container_name: zookeeper
+    build: ./zookeeper
+    networks:
+      - practica_final_bdfi
+
+  kafka:
+    container_name: kafka
+    build: ./kafka
+    depends_on:
+      - zookeeper
+    networks:
+      - practica_final_bdfi
+
+  sparkmaster:
+    container_name: sparkmaster
+    image: bitnami/spark:2.4.4
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./spark/models/:/job_data/models #Bind mount to mount models dir on each spark node
+    networks:
+      - practica_final_bdfi
+
+  sparkworker:
+    container_name: sparkworker
+    image: bitnami/spark:2.4.4
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+    ports:
+    - '8081:8081'
+    volumes:
+      - ./spark/models/:/job_data/models  #Bind mount to mount models dir on each spark node
+    networks:
+      - practica_final_bdfi
+
+networks:
+  practica_final_bdfi:
+    driver: bridge
+
+volumes:
+  mongodbstorage:
