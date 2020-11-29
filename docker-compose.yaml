@@ -38,13 +38,13 @@ services:
       - practica_final_bdfi
 
   spark-master:
-    container_name: sparkmaster
-    build: ./sparkmaster
+    container_name: spark-master
+    build: ./spark-master
     depends_on:
       - kafka
     ports:
-      - '8080:8080'
-      - '7077:7077'
+      - "8080:8080"
+      - "7077:7077"
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
       - ./jars_dir:/opt/bitnami/spark/jars/ivy
@@ -52,12 +52,12 @@ services:
       - practica_final_bdfi
 
   spark-worker:
-    container_name: sparkworker
-    build: ./sparkworker
+    container_name: spark-worker
+    build: ./spark-worker
     depends_on:
       - spark-master
     ports:
-      - '8081:8081'
+      - "8081:8081"
     volumes:
       - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
       - ./jars_dir:/opt/bitnami/spark/jars/ivy

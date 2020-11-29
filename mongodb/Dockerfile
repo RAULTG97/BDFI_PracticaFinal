@@ -1,7 +1,9 @@
 #MONGO
 
-FROM mongo:4.4.2
+FROM mongo:4.2.0
 
+ENV MONGO_HOST=mongo
+ENV MONGO_PORT=27017
 
 COPY ./data /data
 #COPY data /usr/src/flight_prediction/.
