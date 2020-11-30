@@ -17,8 +17,4 @@ ENV SPARK_MASTER_URL=spark://spark-master:7077
 
 EXPOSE 8081
 
-COPY ./practica_big_data_2019 ./practica_big_data_2019
-
-COPY ./flight_prediction.jar jars/.
-
-COPY ./flight_prediction_2.11-0.1.jar jars/
+COPY ../practica_big_data_2019 ./practica_big_data_2019
