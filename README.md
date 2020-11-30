@@ -1,6 +1,11 @@
 # BDFI_PracticaFinal
 Repositorio de la práctica final de BDFI.
-Sistema de predicción de retraso de vuelos
+Sistema de predicción de retraso de vuelos.
+
+*AUTORES*:
+ - Raúl Torres García
+ - Fernando María Suarez Menéndez
+ 
 Objetivos conseguidos:
   - Ejecución en local
   - Job de Spark-Submit
