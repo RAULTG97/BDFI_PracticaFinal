@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="flight_prediction:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/flight_prediction_jar</output-path>
+    <root id="archive" name="flight_prediction.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="flight_prediction" />
+    </root>
+  </artifact>
+</component>

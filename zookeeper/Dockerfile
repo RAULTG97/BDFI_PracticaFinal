@@ -1,3 +1,3 @@
 #ZOOKEEPER
 
-FROM zookeeper:3.5.8
+FROM zookeeper:3.6.2
