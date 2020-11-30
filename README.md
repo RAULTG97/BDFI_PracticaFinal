@@ -16,12 +16,11 @@ Objetivos conseguidos:
 ![alt tag](https://github.com/RAULTG97/BDFI_PracticaFinal/blob/main/escenario.png)
 
 # EJECUCIÓN
-
 ```sh
   $ git clone https://github.com/RAULTG97/BDFI_PracticaFinal.git
   $ cd BDFI_PracticaFinal
   $ sudo docker-compose up
-  $ ver como manejar el lanzamiento del spark-submit
+  $ Haga su predicción --> http://localhost:5000/flights/delays/predict_kafka
 ```
 ----------------------------
 # PARTE 1 [5 PUNTOS]
@@ -110,7 +109,7 @@ Pasos seguidos:
    ``` 
   3. Creamos contenedores docker:
   - 3.1. MongoDB
-       - 3.1.1. Imagen Utilizada: https://hub.docker.com/layers/mongo/library/mongo/4.4.2/images/sha256-8ac5e14d9badded42bcbad612a43bb28ae1bb7e411d2965588dfff83087c5aac?context=explore
+       - 3.1.1. Imagen Utilizada: https://hub.docker.com/layers/mongo/library/mongo/4.2/images/sha256-0c3530b5c53c029794cecaa70f54f9cc7b3be8d1c942d7f6a519548fe537eeee?context=explore
       - 3.1.2. Consideraciones:
         - Le pasamos a la imagen el script import_distances al entrypoint, para que se ejecute al levantar el contenedor
         - Puerto 27027
@@ -126,7 +125,7 @@ Pasos seguidos:
     producer = KafkaProducer(bootstrap_servers=['kafka:9092'],api_version=(2,3,0))
    ```  
 - 3.3. Zookeeper
-    - 3.3.1. Imagen Utilizada: https://hub.docker.com/layers/zookeeper/library/zookeeper/3.4.13/images/sha256-e7dbb1ff2ec430b4d754e769e222809db95feb33e67927a9c80604ba4e0e63b9?context=explore
+    - 3.3.1. Imagen Utilizada: https://hub.docker.com/layers/zookeeper/library/zookeeper/3.6.2/images/sha256-a1d23649faf55feff9223f236c464cadce8069578dd831f9910a512e06659acf?context=explore
   - 3.3.2. Consideraciones:
        - Imagen oficial de Zookeeper que deja arrancado el servidor
         - Puerto 2181
@@ -138,14 +137,14 @@ Pasos seguidos:
         - Puerto 9092
 
 - 3.5. Spark-Master
-     - 3.5.1. Imagen Utilizada: https://hub.docker.com/layers/bitnami/spark/2.4.4/images/sha256-8a848671c4f673602267b21ccfc848229ef092da3f248b35a048c9933f152187?context=explore
+     - 3.5.1. Imagen Utilizada: https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker
     - 3.5.2. Consideraciones:
         - Se define que es SPARK_MODE=master para que al levantar el contenedor arranque el nodo en modo MASTER
         - Puertos: 8080, 7077
         
         
 - 3.6. Spark-Worker
-     - 3.6.1. Imagen Utilizada: https://hub.docker.com/layers/bitnami/spark/2.4.4/images/sha256-8a848671c4f673602267b21ccfc848229ef092da3f248b35a048c9933f152187?context=explore
+     - 3.6.1. Imagen Utilizada: https://github.com/cluster-apps-on-docker/spark-standalone-cluster-on-docker
      - 3.6.2. Consideraciones:
         - Se define que es SPARK_MODE=worker para que al levantar el contenedor arranque el nodo en modo worker
         - Se define la conexión con el MASTER --> ENV SPARK_MASTER_URL=spark://spark-master:7077
@@ -157,7 +156,6 @@ Pasos seguidos:
     .option("kafka.bootstrap.servers", "kafka:9092")
     val writeConfig = WriteConfig(Map("uri" -> "mongodb://mongodb:27017/agile_data_science.flight_delay_classification_response"))
    ``` 
-
     
 4. Definimos docker-compose.yaml
     
