@@ -46,8 +46,9 @@ services:
       - "8080:8080"
       - "7077:7077"
     volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
-      - ./jars_dir:/opt/bitnami/spark/jars/ivy
+      - shared-workspace:/opt/workspace
+      #- ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      #- ./jars_dir:/opt/bitnami/spark/jars/ivy
     networks:
       - practica_final_bdfi
 
@@ -59,8 +60,9 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
-      - ./jars_dir:/opt/bitnami/spark/jars/ivy
+      - shared-workspace:/opt/workspace
+     # - ./spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+     # - ./jars_dir:/opt/bitnami/spark/jars/ivy
     networks:
       - practica_final_bdfi
 
@@ -70,3 +72,4 @@ networks:
 
 volumes:
   practica_final_bdfi_data:
+  shared-workspace:

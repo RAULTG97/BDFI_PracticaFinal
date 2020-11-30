@@ -21,8 +21,8 @@ object MakePrediction {
     import spark.implicits._
 
     //Load the arrival delay bucketizer
-    val base_path= "/home/rtorres/raul/master/BDFI/practica_big_data_2019"
-    //val base_path= "/opt/bitnami/spark/practica_big_data_2019"
+    //val base_path= "/home/rtorres/raul/master/BDFI/practica_big_data_2019"
+    val base_path= "/usr/bin/spark-2.4.4-bin-hadoop2.7/practica_big_data_2019"
     val arrivalBucketizerPath = "%s/models/arrival_bucketizer_2.0.bin".format(base_path)
     print(arrivalBucketizerPath.toString())
     val arrivalBucketizer = Bucketizer.load(arrivalBucketizerPath)
@@ -50,7 +50,7 @@ object MakePrediction {
     val df = spark
       .readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("kafka.bootstrap.servers", "kafka:9092")
       .option("subscribe", "flight_delay_classification_request")
       .load()
     df.printSchema()
@@ -143,8 +143,8 @@ object MakePrediction {
     finalPredictions.printSchema()
 
     // Define MongoUri for connection
-    val writeConfig = WriteConfig(Map("uri" -> "mongodb://127.0.0.1:27017/agile_data_science.flight_delay_classification_response"))
-    //val writeConfig = WriteConfig(Map("uri" -> "mongodb://mongodb:27017/agile_data_science.flight_delay_classification_response"))
+    //val writeConfig = WriteConfig(Map("uri" -> "mongodb://127.0.0.1:27017/agile_data_science.flight_delay_classification_response"))
+    val writeConfig = WriteConfig(Map("uri" -> "mongodb://mongodb:27017/agile_data_science.flight_delay_classification_response"))
 
     // Store to Mongo each streaming batch
     val flightRecommendations = finalPredictions.writeStream.foreachBatch {
