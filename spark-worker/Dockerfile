@@ -11,3 +11,7 @@ ENV SPARK_MASTER_URL=spark://spark-master:7077
 EXPOSE 8081
 
 COPY ./practica_big_data_2019 ./practica_big_data_2019
+
+COPY ./init-worker.sh ./
+
+CMD ["sh","init-worker.sh"]
